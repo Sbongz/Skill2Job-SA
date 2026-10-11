@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123c32">
+  <meta name="description" content="Connect your skills to job opportunities across South Africa.">
+  <title>Skill2Job SA | Your Skills. Your Opportunity.</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7f5;
+      color: #18342b;
+    }
+    header {
+      background: #123c32;
+      color: white;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header h1 { margin: 0; font-size: 24px; }
+    header span { color: #9ee6ad; }
+    button {
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      background: #b8f0c3;
+      color: #123c32;
+    }
+    .hero {
+      background: #185342;
+      color: white;
+      padding: 58px 7%;
+      text-align: center;
+    }
+    .hero h2 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 16px; }
+    .hero p { font-size: 18px; line-height: 1.6; }
+    .search {
+      background: white;
+      max-width: 760px;
+      margin: 26px auto 0;
+      padding: 12px;
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd7d0;
+      border-radius: 7px;
+      font: inherit;
+    }
+    .search input { flex: 1 1 200px; }
+    .search button { flex: 0 0 auto; }
+    main { max-width: 1100px; margin: auto; padding: 30px 18px; }
+    h2.section-title { margin-top: 12px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 3px 12px #163a2b0c;
+    }
+    .card h3 { margin-top: 0; }
+    .muted { color: #61756a; line-height: 1.5; }
+    .category { font-size: 30px; }
+    .job-tag {
+      display: inline-block;
+      background: #e3f5e7;
+      color: #185342;
+      padding: 5px 9px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin: 4px 0 10px;
+    }
+    .job-card button { margin-top: 10px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .secondary { background: white; color: #123c32; border: 1px solid #b8f0c3; }
+    .notice {
+      background: #fff8dc;
+      border-left: 4px solid #e2b541;
+      padding: 12px;
+      line-height: 1.5;
+      margin: 18px 0;
+    }
+    dialog {
+      border: 0;
+      border-radius: 14px;
+      width: min(480px, 94%);
+      padding: 25px;
+      box-shadow: 0 10px 50px #0003;
+    }
+    dialog::backdrop { background: #0008; }
+    dialog form { display: grid; gap: 12px; }
+    footer {
+      background: #123c32;
+      color: white;
+      padding: 28px 6%;
+      text-align: center;
+      line-height: 1.7;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Skill2Job <span>SA 🇿🇦</span></h1>
+    <button onclick="openDialog('roleDialog')">Join Skill2Job</button>
+  </header>
+
+  <section class="hero">
+    <h2>Your Skills. Your Opportunity.</h2>
+    <p>Show the world what you can do. Discover opportunities to put your skills to work.</p>
+    <div class="search">
+      <input id="skillSearch" placeholder="Search skills, e.g. plumbing">
+      <input id="locationSearch" placeholder="Town or city, e.g. Benoni">
+      <button onclick="searchJobs()">Find Work</button>
+    </div>
+    <p style="font-size:14px">Free to browse. No payment required to apply in this demo.</p>
+  </section>
+
+  <main>
+    <section>
+      <h2 class="section-title">Explore Skills</h2>
+      <div class="grid">
+        <article class="card"><div class="category">🧱</div><h3>Construction</h3><p class="muted">Bricklayers, painters and tilers.</p></article>
+        <article class="card"><div class="category">🔧</div><h3>Plumbing</h3><p class="muted">Plumbers and pipe fitters.</p></article>
+        <article class="card"><div class="category">💇</div><h3>Beauty</h3><p class="muted">Hairdressers and barbers.</p></article>
+        <article class="card"><div class="category">🌱</div><h3>Gardening</h3><p class="muted">Gardeners and landscapers.</p></article>
+        <article class="card"><div class="category">🧹</div><h3>Cleaning</h3><p class="muted">Domestic and commercial cleaning.</p></article>
+        <article class="card"><div class="category">💻</div><h3>Technology</h3><p class="muted">Design, computer support and digital work.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Example Job Listings</h2>
+      <p class="muted">These are sample listings to demonstrate the design, not real vacancies.</p>
+      <div class="grid" id="jobList">
+        <article class="card job-card" data-skill="gardening garden landscaper" data-location="benoni gauteng">
+          <span class="job-tag">SAMPLE JOB</span>
+          <h3>Garden Maintenance Assistant</h3>
+          <p class="muted">📍 Benoni, Gauteng</p>
+          <p>Help with garden maintenance and general outdoor work.</p>
+          <strong>Illustrative pay: R350/day</strong><br>
+          <button onclick="showSampleNotice()">View Opportunity</button>
+        </article>
+        <article class="card job-card" data-skill="painting construction painter" data-location="boksburg gauteng">
+          <span class="job-tag">SAMPLE JOB</span>
+          <h3>Painting Assistant</h3>
+          <p class="muted">📍 Boksburg, Gauteng</p>
+          <p>Assist with preparing surfaces and painting.</p>
+          <strong>Pay to be agreed</strong><br>
+          <button onclick="showSampleNotice()">View Opportunity</button>
+        </article>
+        <article class="card job-card" data-skill="hairdressing beauty barber" data-location="germiston gauteng">
+          <span class="job-tag">SAMPLE JOB</span>
+          <h3>Hair Salon Assistant</h3>
+          <p class="muted">📍 Germiston, Gauteng</p>
+          <p>Support a salon with customer service and hair care.</p>
+          <strong>Pay to be agreed</strong><br>
+          <button onclick="showSampleNotice()">View Opportunity</button>
+        </article>
+      </div>
+      <p id="noResults" class="notice hidden">No matching sample listings. Try a different skill or location.</p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Get Started</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>👷 I'm a Skilled Worker</h3>
+          <p class="muted">Create a profile to showcase your skills and experience.</p>
+          <button onclick="chooseRole('worker')">Join as Worker</button>
+        </article>
+        <article class="card">
+          <h3>🏢 I'm an Employer</h3>
+          <p class="muted">Tell us about your business and the people you need.</p>
+          <button onclick="chooseRole('employer')">Join as Employer</button>
+        </article>
+      </div>
+    </section>
+    <p class="notice"><strong>Safety:</strong> Never pay someone to secure a job. Verify employers and agree on pay and work conditions before starting. Sample listings are not real job offers.</p>
+  </main>
+
+  <footer>
+    <strong>Skill2Job SA</strong><br>
+    Your Skills. Your Opportunity.<br>
+    Connecting skills to opportunities across South Africa.
+  </footer>
+
+  <dialog id="roleDialog">
+    <h2>Join Skill2Job SA</h2>
+    <p>How would you like to use the platform?</p>
+    <div class="actions">
+      <button onclick="chooseRole('worker')">I'm a Worker</button>
+      <button onclick="chooseRole('employer')">I'm an Employer</button>
+    </div>
+    <p><button class="secondary" onclick="closeDialogs()">Cancel</button></p>
+  </dialog>
+
+  <dialog id="signupDialog">
+    <h2 id="formTitle">Create your profile</h2>
+    <p class="muted">Prototype only: this form does not send or save your information.</p>
+    <form id="signupForm">
+      <input id="fullName" placeholder="Your name" required maxlength="100">
+      <input id="email" type="email" placeholder="Email address" required>
+      <input id="town" placeholder="Town or city" required maxlength="100">
+      <div id="workerFields">
+        <input id="skills" placeholder="Your skills, e.g. painting, plumbing" maxlength="300">
+        <textarea id="experience" placeholder="Briefly describe your experience" rows="3" maxlength="1000"></textarea>
+      </div>
+      <div id="employerFields" class="hidden">
+        <input id="business" placeholder="Business name" maxlength="150">
+        <textarea id="jobNeed" placeholder="What skills or workers do you need?" rows="3" maxlength="1000"></textarea>
+      </div>
+      <button type="submit">Preview Registration</button>
+      <button type="button" class="secondary" onclick="closeDialogs()">Cancel</button>
+    </form>
+    <div id="formResult" class="notice hidden"></div>
+  </dialog>
+
+  <script>
+    let selectedRole = "worker";
+
+    function openDialog(id) {
+      document.getElementById(id).showModal();
+    }
+
+    function closeDialogs() {
+      document.querySelectorAll("dialog").forEach(d => d.close());
+    }
+
+    function chooseRole(role) {
+      selectedRole = role;
+      closeDialogs();
+      document.getElementById("formTitle").textContent =
+        role === "worker" ? "Create your worker profile" : "Register as an employer";
+      document.getElementById("workerFields").classList.toggle("hidden", role !== "worker");
+      document.getElementById("employerFields").classList.toggle("hidden", role !== "employer");
+      document.getElementById("formResult").classList.add("hidden");
+      document.getElementById("signupForm").reset();
+      openDialog("signupDialog");
+    }
+
+    function searchJobs() {
+      const skill = document.getElementById("skillSearch").value.trim().toLowerCase();
+      const location = document.getElementById("locationSearch").value.trim().toLowerCase();
+      let visible = 0;
+      document.querySelectorAll(".job-card").forEach(card => {
+        const matchesSkill = !skill || card.dataset.skill.includes(skill) ||
+          card.textContent.toLowerCase().includes(skill);
+        const matchesLocation = !location || card.dataset.location.includes(location) ||
+          card.textContent.toLowerCase().includes(location);
+        card.classList.toggle("hidden", !(matchesSkill && matchesLocation));
+        if (matchesSkill && matchesLocation) visible++;
+      });
+      document.getElementById("noResults").classList.toggle("hidden", visible > 0);
+    }
+
+    function showSampleNotice() {
+      alert("This is a sample listing. No real employer or vacancy is connected yet.");
+    }
+
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const name = document.getElementById("fullName").value.trim();
+      const town = document.getElementById("town").value.trim();
+      const result = document.getElementById("formResult");
+      result.textContent = "Preview created for " + name + " in " + town +
+        ". This is only a local demonstration: your details have not been sent or saved. Real accounts and job applications will be added in the next development stage.";
+      result.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
