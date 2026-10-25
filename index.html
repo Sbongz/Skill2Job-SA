@@ -344,5 +344,104 @@ style="display:inline-block;padding:12px 20px;background:#0b6bcb;color:white;tex
 </div>
 </section>
 <!-- END SKILL2JOB SA SERVICES -->
+<!-- SKILL2JOB SA FIND JOBS -->
+<section id="job-listings" style="padding:30px 15px;background:#fff;font-family:Arial,sans-serif;">
+  <h2 style="color:#123c32;text-align:center;">🔎 Find Jobs in South Africa</h2>
+  <p style="text-align:center;">Search opportunities by keyword, location or job type.</p>
+
+  <input id="jobSearch" type="search" placeholder="Job title, company or skill"
+    style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;">
+
+  <select id="jobLocation" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;">
+    <option value="">All locations</option>
+    <option>Johannesburg</option>
+    <option>Benoni</option>
+    <option>Pretoria</option>
+    <option>Cape Town</option>
+    <option>Durban</option>
+    <option>Remote</option>
+  </select>
+
+  <select id="jobType" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;">
+    <option value="">All job types</option>
+    <option>Full-time</option>
+    <option>Part-time</option>
+    <option>Contract</option>
+    <option>Temporary</option>
+    <option>Remote</option>
+  </select>
+
+  <p style="background:#fff3cd;padding:12px;border-radius:8px;">
+    ⚠️ Demo listings only. These are examples for testing the search, not real job vacancies.
+  </p>
+
+  <div id="jobResults">
+    <article class="job-card" data-location="Johannesburg" data-type="Full-time"
+      style="border:1px solid #ddd;border-radius:10px;padding:16px;margin:12px 0;">
+      <h3>Example: Office Administrator</h3>
+      <p><strong>Company:</strong> Demo Company — not a real vacancy</p>
+      <p><strong>Location:</strong> Johannesburg</p>
+      <p><strong>Type:</strong> Full-time</p>
+      <p>Example skills: organisation, communication and computer literacy.</p>
+    </article>
+
+    <article class="job-card" data-location="Benoni" data-type="Part-time"
+      style="border:1px solid #ddd;border-radius:10px;padding:16px;margin:12px 0;">
+      <h3>Example: Retail Assistant</h3>
+      <p><strong>Company:</strong> Demo Store — not a real vacancy</p>
+      <p><strong>Location:</strong> Benoni</p>
+      <p><strong>Type:</strong> Part-time</p>
+      <p>Example skills: customer service, teamwork and reliability.</p>
+    </article>
+
+    <article class="job-card" data-location="Remote" data-type="Contract"
+      style="border:1px solid #ddd;border-radius:10px;padding:16px;margin:12px 0;">
+      <h3>Example: Data Entry Assistant</h3>
+      <p><strong>Company:</strong> Demo Company — not a real vacancy</p>
+      <p><strong>Location:</strong> Remote</p>
+      <p><strong>Type:</strong> Contract</p>
+      <p>Example skills: typing, accuracy and basic computer skills.</p>
+    </article>
+  </div>
+
+  <p id="noJobs" style="display:none;padding:12px;">No matching demo listings. Try changing your search or filters.</p>
+</section>
+
+<script>
+(function () {
+  const search = document.getElementById("jobSearch");
+  const location = document.getElementById("jobLocation");
+  const type = document.getElementById("jobType");
+  const cards = document.querySelectorAll("#jobResults .job-card");
+  const noJobs = document.getElementById("noJobs");
+
+  function filterJobs() {
+    const keyword = search.value.toLowerCase().trim();
+    const selectedLocation = location.value;
+    const selectedType = type.value;
+    let visible = 0;
+
+    cards.forEach(function (card) {
+      const text = card.textContent.toLowerCase();
+      const matchesKeyword = text.includes(keyword);
+      const matchesLocation = !selectedLocation ||
+        card.dataset.location === selectedLocation;
+      const matchesType = !selectedType ||
+        card.dataset.type === selectedType;
+
+      const show = matchesKeyword && matchesLocation && matchesType;
+      card.style.display = show ? "block" : "none";
+      if (show) visible++;
+    });
+
+    noJobs.style.display = visible ? "none" : "block";
+  }
+
+  search.addEventListener("input", filterJobs);
+  location.addEventListener("change", filterJobs);
+  type.addEventListener("change", filterJobs);
+})();
+</script>
+<!-- END SKILL2JOB SA FIND JOBS -->
 </body>
 </html>
