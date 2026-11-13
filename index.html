@@ -114,6 +114,87 @@
       line-height: 1.7;
     }
     .hidden { display: none; }
+    
+/* SKILL2JOB SA MODERN DESIGN */
+:root {
+  --navy: #102a43;
+  --blue: #1769e0;
+  --light: #f1f6fc;
+  --white: #ffffff;
+  --text: #243b53;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #102a43, #1769e0);
+  color: white;
+  padding: 35px 6%;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+header p {
+  font-size: 17px;
+}
+
+button, a {
+  transition: 0.2s ease;
+}
+
+button, .btn {
+  border-radius: 9px;
+  font-weight: bold;
+}
+
+section {
+  padding: 35px 6%;
+}
+
+.card, .job-card, .service-card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  margin: 15px 0;
+  box-shadow: 0 4px 18px rgba(16,42,67,0.08);
+  border: 1px solid #e3ebf5;
+}
+
+input, select, textarea {
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 13px;
+  max-width: 100%;
+}
+
+a:hover, button:hover {
+  opacity: 0.85;
+}
+
+footer {
+  background: #102a43;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 26px;
+  }
+
+  section {
+    padding: 25px 5%;
+  }
+}
+
   </style>
 </head>
 <body>
