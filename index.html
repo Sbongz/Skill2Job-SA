@@ -208,6 +208,29 @@ footer {
   color: #ffffff;
 }
 
+/* COMPACT EXPLORE SKILLS LAYOUT */
+main > section:first-child .grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+main > section:first-child .grid .card {
+  margin: 0;
+  padding: 17px 13px;
+  min-height: 145px;
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(16,42,67,0.07);
+}
+
+/* THREE COLUMNS ON LARGER SCREENS */
+@media (min-width: 700px) {
+  main > section:first-child .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
   </style>
 </head>
 <body>
